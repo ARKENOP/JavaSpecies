@@ -13,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -69,5 +70,23 @@ public class JavaSpeciesApplication implements CommandLineRunner {
         speciesRepository.deleteById(4);
         System.out.println("Nombre d'animaux après le delete: " + speciesRepository.findAll().size());
 
+
+        System.out.println(speciesRepository.findFirstByCommonName("Chat"));
+        System.out.println(speciesRepository.findAllByCommonName("Chien"));
+
+        System.out.println(personRepository.findByLastnameOrFirstname("Lamarque", "Henri"));
+        System.out.println(personRepository.findByAgeGreaterThanEqual(50));
+
+        System.out.println(animalRepository.findBySpeciesId(3));
+        System.out.println(animalRepository.findByColorIn(List.of("roux", "brun")));
+
+        System.out.println(speciesRepository.findAllByCommonNameAsc());
+        System.out.println(speciesRepository.findAllByCommonNameLike("Chien"));
+
+        System.out.println(personRepository.findAllByAgeBetween(20, 30));
+        System.out.println(personRepository.findAllByAnimalId(1));
+
+        System.out.println(animalRepository.countBySex("M"));
+        System.out.println(animalRepository.isOwned(1));
     }
 }
