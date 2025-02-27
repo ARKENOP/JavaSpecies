@@ -8,6 +8,7 @@ import epsi.psupiot.javaspecies.repository.AnimalRepository;
 import epsi.psupiot.javaspecies.repository.PersonRepository;
 import epsi.psupiot.javaspecies.repository.RoleRepository;
 import epsi.psupiot.javaspecies.repository.SpeciesRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -88,5 +89,20 @@ public class JavaSpeciesApplication implements CommandLineRunner {
 
         System.out.println(animalRepository.countBySex("M"));
         System.out.println(animalRepository.isOwned(1));
+
+        testDeleteAllWithoutAnimals();
+        testGenerateRandomPersons(2);
+    }
+
+    @Transactional
+    public void testDeleteAllWithoutAnimals() {
+        personRepository.deleteAllWithoutAnimals();
+        System.out.println("Toutes les personnes sans animaux ont été supprimées.");
+    }
+
+    @Transactional
+    public void testGenerateRandomPersons(int count) {
+        personRepository.generateRandomPersons(count);
+        System.out.println(count + " personnes aléatoires ont été générées.");
     }
 }
